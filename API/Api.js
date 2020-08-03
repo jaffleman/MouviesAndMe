@@ -31,8 +31,8 @@ export async function getfilmsDeteils(id) {
 
 export async function getClipData(arg) {
     try {
-        
-        const response = await fetch(`http://192.168.0.15:8081/datas?arg=${arg}`)
+        console.log('New demande');
+        const response = await fetch(`http://tdp.jaffleman.tech:8081/datas?arg=${arg}`)
         return await response.json()
     }
     catch (error) {
