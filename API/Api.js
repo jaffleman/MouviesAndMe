@@ -1,5 +1,4 @@
 const API_TOKEN = '8d01e655bb67b30c4b65ba9ee95b62c7'
-
             
 export default async function getFilmsList(text,page=1){
     const url2=`https://api.themoviedb.org/3/search/movie?api_key=${API_TOKEN}&language=fr&query=${text}&page=${page}`
@@ -45,8 +44,6 @@ export async function getUpComingFilms(page) {
     const url3 = `https://api.themoviedb.org/3/discover/movie?api_key=8d01e655bb67b30c4b65ba9ee95b62c7&sort_by=release_date.asc&include_adult=false&include_video=false&page=${page}&release_date.gte=2019-01-01&year=2020`
     const url4 = `https://api.themoviedb.org/3/movie/now_playing?api_key=8d01e655bb67b30c4b65ba9ee95b62c7&language=fr&page=${page}`
     try {
-        
-        
         const response = await fetch(url4)
         return await response.json()
     }

@@ -6,13 +6,13 @@ import { Clipboard } from "react-native";
 import { getClipData } from '../API/Api'
 
 const Item = ({ item, onPress, style }) => (
-    <TouchableOpacity onPress={onPress} style={[styles.item, style] } >
-        <View style={{flexDirection:'row', justifyContent:'space-around' }} >
-            <Badge value={item.nd} status="primary" containerStyle={{top: 7, right: 0 }}/>
-            <Text style={styles.title}>{item.reglette+' '+item.posission}</Text>        
-        </View>
-    </TouchableOpacity>
-  );
+  <TouchableOpacity onPress={onPress} style={[styles.item, style] } >
+      <View style={{flexDirection:'row', justifyContent:'space-around' }} >
+          <Badge value={item.nd} status="primary" containerStyle={{top: 7, right: 0 }}/>
+          <Text style={styles.title}>{item.reglette+' '+item.posission}</Text>        
+      </View>
+  </TouchableOpacity>
+);
   
 const MapTDP = () => {
   const [selectedId, setSelectedId] = useState(null);
@@ -56,42 +56,41 @@ const MapTDP = () => {
     );
   };   
 
-  return ( 
-    
-      
-      <SafeAreaView style={styles.container}>
-        <Button title={'Coller'} onPress={getClip}/>
-        <FlatList
-          data={ClipStat}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.rep+item.reglette+item.posission}
-          extraData={selectedId}
-        />
-        {
-          //{console.log(`ClipStat: ${ClipStat}`)}
-        }
-      </SafeAreaView>
-    
+  return (  
+    <SafeAreaView style={styles.container}>
+      <Button title={'Coller'} onPress={getClip}/>
+      <FlatList
+        data={ClipStat}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.rep+item.reglette+item.posission}
+        extraData={selectedId}
+      />
+      {
+        //{console.log(`ClipStat: ${ClipStat}`)}
+      }
+    </SafeAreaView> 
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
-    padding: 5,
-    marginVertical: 2,
-    marginHorizontal: 40,
-    borderRadius: 10,
-    
-  },
-  title: {
-    textAlign: "center",
-    fontSize:22
-  },
-});
+const styles = StyleSheet.create(
+  {
+    container: {
+      flex: 1,
+      marginTop: StatusBar.currentHeight || 0,
+    },
+    item: {
+      padding: 5,
+      marginVertical: 2,
+      marginHorizontal: 40,
+      borderRadius: 10,
+      
+    },
+    title: {
+      textAlign: "center",
+      fontSize:22
+    },
+  }
+);
 
 const mapStateToProps = (state)=>{return {favoritesFilms:state.favoritesFilms}}
 export default connect(mapStateToProps)(MapTDP)
