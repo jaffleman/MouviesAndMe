@@ -31,7 +31,6 @@ export async function getfilmsDeteils(id) {
 
 export async function getClipData(arg) {
     try {
-        console.log('New demande');
         const response = await fetch(`http://tdp.jaffleman.tech:8081/datas?arg=${arg}`)
         return await response.json()
     }
