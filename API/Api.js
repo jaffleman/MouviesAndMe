@@ -28,7 +28,6 @@ export async function getfilmsDeteils(id) {
     }
 }
 
-
 export async function getClipData(arg) {
     try {
         console.log('New demande');
