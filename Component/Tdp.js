@@ -5,14 +5,29 @@ import { connect } from 'react-redux'
 import { Clipboard } from "react-native";
 import { getClipData } from '../API/Api'
 
-const Item = ({ item, onPress, style }) => (
+const Item = ({ item, onPress, style, deteilsView }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, style] } >
-      <View style={{flexDirection:'row', justifyContent:'space-around' }} >
-          <Badge value={item.nd} status="primary" containerStyle={{top: 7, right: 0 }}/>
-          <Text style={styles.title}>{item.reglette+' '+item.posission}</Text>        
+      <View style={{flexDirection:'row', justifyContent:'center' }} >
+          <Badge value={item.nd} status="primary" containerStyle={{top: 8, right: 0 }}/>
+          <Text style={styles.title}>{` -->   ${item.reglette} ${item.posission}`}</Text>        
       </View>
+      {Deteils(item,deteilsView)}
   </TouchableOpacity>
 );
+
+
+const Deteils = ( item, deteilsView ) => {
+  if (deteilsView) {
+    return (
+      <View>
+        <Text style={styles.title}>{`Coordonnées: [${item.colone}-${item.posissionReglette}][${item.magik}]`}</Text>
+        <Text style={styles.title}>{`${item.rep} - Salle:[${item.salle}] - rco:[${item.rco}]`}</Text>
+      </View>
+    )
+  }  
+}
+
+
   
 const MapTDP = () => {
   const [selectedId, setSelectedId] = useState(null);
@@ -47,11 +62,14 @@ const MapTDP = () => {
   
   const renderItem = ({ item }) => {
     const backgroundColor = item.nd === selectedId ? "lightgreen" : "lightyellow";
+    const deteilsView = item.nd === selectedId ? true : false;
     return (
       <Item
         item={item}
         onPress={() => setSelectedId(item.nd)}
         style={{ backgroundColor }}
+        deteilsView = {deteilsView}
+
       />
     );
   };   
@@ -65,9 +83,6 @@ const MapTDP = () => {
         keyExtractor={(item) => item.rep+item.reglette+item.posission}
         extraData={selectedId}
       />
-      {
-        //{console.log(`ClipStat: ${ClipStat}`)}
-      }
     </SafeAreaView> 
   );
 };
